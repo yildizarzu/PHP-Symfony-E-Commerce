@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+<title> {% block title %} E-Kanaviçe & Etamin  {% endblock %} </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<title> {% block description %} Deneme Description {% endblock %}</title>">
+    <meta name="keywords" content="<title> {% block keywords %} Deneme Keywords {% endblock %}</title>">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Anasayfa | E-Kanaviçe</title>
+    <link href="{{ asset('home') }}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('home') }}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('home') }}/css/prettyPhoto.css" rel="stylesheet">
+    <link href="{{ asset('home') }}/css/price-range.css" rel="stylesheet">
+    <link href="{{ asset('home') }}/css/animate.css" rel="stylesheet">
+    <link href="{{ asset('home') }}/css/main.css" rel="stylesheet">
+    <link href="{{ asset('home') }}/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="{{ asset('home') }}/js/html5shiv.js"></script>
+    <script src="{{ asset('home') }}/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('home') }}/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href={{ asset('home') }}"/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('home') }}/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('home') }}/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> 0538 934 88 84</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> arzuy1586@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="{{ path('home') }}"><img src="{{ asset('home') }}/images/home/logo.png" alt="" /></a>
+                    </div>
+
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav" >
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <div class="col-sm-8">
+                                    <div class="shop-menu pull-right" margin-top="100px">
+                                        <ul class="nav navbar-nav">
+                                            {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                                                <li><a href="{{ path('admin') }}"><i class="fa fa-user"></i>Admin</a></li>
+                                            {% else %}
+                                                <li><a href="{{ path('shopcart_index') }}"><i class="fa fa-shopping-cart"></i>
+                                                        Sepetim</a></li>
+                                            {% endif %}
+                                            <li><a href="{{ path('orders_index') }}"><i class="fa fa-user"></i>Siparişlerim</a></li>
+                                            <li><a href="{{ path('home_account',{'id':app.user.id}) }}"><i class="fa fa-user"></i>Hesabım</a></li>
+                                            <li><a href="{{ path('app_logout') }}">Çıkış</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <li><a href="{{ path('new_user') }}"><i class="fa fa-lock"></i> Kayıt Ol </a></li>
+                                <li><a href="{{ path('app_login') }}"><i class="fa fa-lock"></i> Giriş Yap </a></li>
+
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div><!--/header-middle-->
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="{{ path('home') }}" class="active">Anasayfa</a></li>
+                            <li><a href="{{ path('home_aboutus') }}">Hakkımızda</a></li>
+                            {#<li><a href="{{ path('referans') }}">Referanslar</a></li>#}
+                            <li><a href="{{ path('home_contact') }}">İletişim</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="search_box pull-right">
+                        <input type="text" placeholder="Search"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% block menu %} {% endblock %}
+    {% block slider %} {% endblock %}
+    {% block main %} {% endblock %}
+
+    <!--/header-bottom-->
+    <footer id="footer"><!--Footer-->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="companyinfo">
+                            <h2><span>e</span>-kanaviçe & etamin</h2>
+                            <p>Türkiye’deki işleme teknikleri arasında en yaygın olanı kanaviçedir.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="https://www.youtube.com/watch?v=yADTFyNdGdg">
+                                    <div class="iframe-img">
+                                        <img src="{{ asset('home') }}/images/home/iiframe1.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Kolye yapımı</p>
+                                <h2>29 Kasım 2018</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="https://www.youtube.com/watch?v=9AhYTfe5Owg">
+                                    <div class="iframe-img">
+                                        <img src="{{ asset('home') }}/images/home/iiframe2.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Pano Yapımı</p>
+                                <h2>29 Kasım 2018</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="https://www.youtube.com/watch?v=FvBuNpRJBCE">
+                                    <div class="iframe-img">
+                                        <img src="{{ asset('home') }}/images/home/iiframe3.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Havlu Yapımı</p>
+                                <h2>29 Kasım 2018</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="video-gallery text-center">
+                                <a href="https://www.youtube.com/watch?v=aGZaM2ZKYVU">
+                                    <div class="iframe-img">
+                                        <img src="{{ asset('home') }}/images/home/iiframe4.png" alt="" />
+                                    </div>
+                                    <div class="overlay-icon">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </div>
+                                </a>
+                                <p>Seccade yapımı</p>
+                                <h2>29 Kasım 2018</h2>
+                            </div>
+                        </div>
+
+                    <div class="col-sm-3">
+                        <div class="address">
+                            <img src="{{ asset('home') }}/images/home/map.png" alt="" />
+                            <p>78 Karabük Türkiye</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Servisler</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Çevrimiçi Yardım</a></li>
+                                <li><a href="#">Bizimle iletişime geçin</a></li>
+                                <li><a href="#">Sipariş Durumları</a></li>
+                                <li><a href="#">Sık Sorulan Sorular</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Hızlı Alışveriş</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Yeni Ürünler</a></li>
+                                <li><a href="#">İndirimdekiler</a></li>
+                                <li><a href="#">Sepetimdekiler</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2018 E-KANAVİÇE & ETAMİN Inc. All rights reserved.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Arzu Yıldız</a></span></p>
+                </div>
+            </div>
+
+        </div>
+            <</div>
+
+    </footer><!--/Footer-->
+
+
+
+
+    <script src="{{ asset('home') }}/js/jquery.js"></script>
+    <script src="{{ asset('home') }}/js/bootstrap.min.js"></script>
+    <script src="{{ asset('home') }}/js/jquery.scrollUp.min.js"></script>
+    <script src="{{ asset('home') }}/js/price-range.js"></script>
+    <script src="{{ asset('home') }}/js/jquery.prettyPhoto.js"></script>
+    <script src="{{ asset('home') }}/js/main.js"></script>
+</header><!--/header-->
+</body>
+
+
+</html>

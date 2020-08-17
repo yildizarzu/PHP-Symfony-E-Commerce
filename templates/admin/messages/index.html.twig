@@ -1,0 +1,43 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %} Mesajlar {% endblock %}
+{% block header %} {% include 'admin/navbar.twig' %}{% endblock %}
+{% block navbar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+{% block content %}
+    {{ include('alerts.html.twig') }}
+    <div class="content-panel">
+        <h4><i class="fa fa-angle-right"></i> Mesaj Listesi</h4>
+        <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mesaj Kodu</th>
+                <th>Gönderen</th>
+                <th>E-Mail Adresi</th>
+                <th>Konu</th>
+                <th>Mesaj</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td style="padding-left: 50px">{{ message.id }}</td>
+                <td>{{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.message }}</td>
+                <td>
+                    <a href="{{ path('messages_show', {'id': message.id}) }}"><button class="btn btn-primary btn-xs">Göster</button></a>
+                    <a href="{{ path('messages_delete', {'id': message.id}) }}" onclick="return confirm('Bu mesajı silmek istediğinize emin misiniz ?');" ><button class="btn btn-danger btn-xs">Sil</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Hiç Mesajınız Yok</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Kanaviçe & Etamin{% endblock %}
+
+{% block header %}
+
+    {{ include ('alerts.html.twig') }}
+{% endblock %}
+
+{% block menu %}
+    {{ include ('home/_menu.html.twig') }}
+
+{% endblock %}
+
+{% block slider %} {{ include ('home/_slider.html.twig') }} {% endblock %}
+
+{% block main %}
+
+    <div style="padding-left:300px;padding-right:200px;" class="single-pro">
+        {% for product in products %}
+
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            {% set break = false %}
+                            {% for resim in resimler if not break %}
+                                {% if product.id == resim.urunid %}
+                                    {% set break = true %}
+                                    <img height="250" width="300" style="margin-left: 100px" src="{{ asset('uploads') }}/images/{{ resim.resim }}" alt="">
+                                {% endif %}
+                            {% endfor %}
+                            <h2>{{ product.fiyat }} ₺</h2>
+                            <p>{{ product.urunadi }}</p>
+                            <a href="{{ path('product_detail',{'id':product.id}) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>{{ product.fiyat }} ₺</h2>
+                                <p>{{ product.urunadi }}</p>
+                                <a href="{{ path('product_detail',{'id':product.id}) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="clearfix"></div>
+    </div>
+
+{% endblock %}
+
+{% block footer %} {{ include ('home/_footer.html.twig') }} {% endblock %}

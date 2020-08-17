@@ -1,0 +1,68 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Yeni Kategori{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+    <div class="form-panel">
+        <h4><i class="fa fa-angle-right"></i> Kategori Ekle</h4>
+        <hr>
+        <div class="form">
+            <form class="cmxform form-horizontal style-form" method="post">
+                <div class="form-group ">
+                    <label class="control-label col-lg-2">Üst Kategori Adı</label>
+                    <div class="col-lg-10">
+                        <select name="categories[parentid]" class="form-control">
+                            <option value="0">Ana Kategori</option>
+                            {% for cat in cats %}
+                            <option value="{{ cat.id }}">{{ cat.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-lg-2">Başlık</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" id="title" name="categories[title]" maxlength="50"
+                               value="{{ category.title }}">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-lg-2">Anahtar Kelimeler</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" id="keywords" name="categories[keywords]"
+                               maxlength="255" value="{{ category.keywords }}">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-lg-2">Açıklama</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" id="description" name="categories[description]"
+                               maxlength="255" value="{{ category.description }}">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-lg-2">Kategori Durumu</label>
+                    <div class="col-lg-10">
+                        <select name="categories[status]" class="form-control">
+                            <option value="true">Aktif</option>
+                            <option value="false">Devre Dışı</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-theme" type="submit">Ekle</button>
+                        <a href="{{ path('kategoriler_index') }}">
+                            <button class="btn btn-theme04" type="button">İptal</button>
+                        </a>
+                    </div>
+                </div>
+                <input type="hidden" id="categories__token" name="categories[_token]" value="8UqPlI0U0gVzk5l848cc4SoYz2kWEPNj6AqEZCbMfI4">
+            </form>
+        </div>
+    </div>
+{% endblock %}

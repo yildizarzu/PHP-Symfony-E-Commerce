@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('resimler_delete', {'id': resimler.id}) }}" onsubmit="return confirm('Resimi silmek istediğinize emin misiniz ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resimler.id) }}">
+    <button style="margin-left:5px;" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+</form>

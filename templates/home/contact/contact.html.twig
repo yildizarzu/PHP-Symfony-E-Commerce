@@ -1,0 +1,51 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Kanaviçe & Etamin{% endblock %}
+
+{% block header %}
+    {{ include ('home/_header.html.twig') }}
+    {{ include ('alerts.html.twig') }}
+{% endblock %}
+
+
+
+{% block main %}
+    <div style="padding-left:200px;" class="content">
+        {{ include('alerts.html.twig') }}
+        <div class="section group">
+            <div class="col span_2_of_3">
+                <h2>İletişim</h2>
+                {{ setting.contact|raw }}
+            </div>
+            <div class="col span_1_of_3">
+                <div style="background: white" class="contact-form">
+                    <h2 style="text-transform: capitalize;">Bizimle İletişime Geçin</h2>
+                    <form name="messages" method="post">
+                        <div>
+                            <span><label>Tam Adınız</label></span>
+                         <span><input style="color:black;" name="messages[name]" type="text" class="textbox"></span>
+                        </div>
+                        <div>
+                            <span><label>E-mail Adresiniz</label></span>
+                            <span><input style="color:black;" name="messages[email]" type="text" class="textbox"></span>
+                        </div>
+                        <div>
+                            <span><label>Konu</label></span>
+                            <span><input style="color:black;" name="messages[subject]" type="text" class="textbox"></span>
+                        </div>
+                        <div>
+                            <span><label>Mesajınız</label></span>
+                            <span><textarea style="width:80%;" name="messages[message]"> </textarea></span>
+                        </div>
+                        <div>
+                            <span><input type="submit" value="Gönder" class="myButton"></span>
+                        </div>
+                        <input type="hidden" id="messages__token" name="messages[_token]" value="OK3tVAiJi023IhKqODm24wxdVDPzkPngS1OIaBjz2rU">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %} {{ include ('home/_footer.html.twig') }} {% endblock %}

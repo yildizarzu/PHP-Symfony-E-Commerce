@@ -1,0 +1,13 @@
+{% if bilgi != '' %}
+{% if bilgi == '1' %}
+    <div class="alert alert-success"><b>İşlem Başarılı!</b>{{ yazi }}</div>
+{% endif %}
+{% if bilgi == '2' %}
+    <div class="alert alert-info"><b>Bilgilendirme!</b>{{ yazi }}</div>
+{% endif %}
+{% if bilgi == '3' %}
+    <div class="alert alert-warning"><b>Uyarı!</b>{{ yazi }}</div>
+{% else %}
+    <div class="alert alert-danger"><b>İşlem Başarısız!</b>{{ yazi }}</div>
+{% endif %}
+{% endif %}

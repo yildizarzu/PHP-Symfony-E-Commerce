@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('shopcart_delete', {'id': cart.id}) }}" onsubmit="return confirm('Sepetinizdeki ürün kaldırılacaktır Onaylıyor musunuz ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cart.id) }}">
+    <button style="border:0;background:#E4292F;font-weight: bolder;color:white" class="btn-primary">Sil</button>
+</form>

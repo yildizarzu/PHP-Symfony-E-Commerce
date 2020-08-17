@@ -1,0 +1,81 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Ürün Detayı{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+
+<div class="form-panel">
+    <h4><i class="fa fa-angle-right"></i> Ürün - {{ product.id }}</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Ana Kategori Adı</th>
+                <td>
+                    {% for cat in categories %}
+                        {% if product.categoryid == cat.id %}
+                        {{ cat.title }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Alt Kategori Adı</th>
+                <td>
+                    {% for cat in categories %}
+                        {% if product.subcategoryid == cat.id %}
+                            {{ cat.title }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Ürün Adı</th>
+                <td>{{ product.urunadi }}</td>
+            </tr>
+            <tr>
+                <th>Marka</th>
+                <td>{{ product.marka }}</td>
+            </tr>
+            <tr>
+                <th>Fiyat</th>
+                <td>{{ product.fiyat }} ₺</td>
+            </tr>
+            <tr>
+                <th>Stok</th>
+                <td>{{ product.stok }} Adet</td>
+            </tr>
+            <tr>
+                <th>Durum</th>
+                <td>
+                    {% if product.durum == "true" %}
+                        Aktif
+                    {% else %}
+                        Devre Dışı
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Teknik Özellikler</th>
+                <td>{{ product.teknikozellikler|raw }}</td>
+            </tr>
+            <tr>
+                <th>Diğer Özellikler</th>
+                <td>{{ product.digerozellikler|raw }}</td>
+            </tr>
+            <tr>
+                <th>Resimler</th>
+                <td><a style="color:white;" class="btn btn-primary" onclick="openWin('{{ path('product_gallery',{'id':product.id}) }}',680,500)">Galeri</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('product_index') }}">Geri Dön</a>
+
+    <a class="btn btn-info" href="{{ path('product_edit', {'id': product.id}) }}">Düzenle</a>
+</div>
+
+{% endblock %}

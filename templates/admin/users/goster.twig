@@ -1,0 +1,65 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Üye Detayı{% endblock %}
+
+{% block pagetitle %} {{ pagetitle }} {% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+
+
+    <div class="form-panel">
+        <h4><i class="fa fa-angle-right"></i> Üye - {{ user.name }}</h4>
+        <hr>
+        <table class="table">
+            <tbody>
+            <tr>
+            <th>Kullanıcı Kodu</th>
+            <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>İsim</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>E-Mail Adresi</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Adres Bilgileri</th>
+                <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+                <th>Şehir</th>
+                <td>{{ user.city }}</td>
+            </tr>
+            <tr>
+                <th>Telefon</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>Rol</th>
+                <td>{% if user.roles[0] == "ROLE_USER" %}
+                        Normal Kullanıcı
+                    {% else %}
+                        Admin Kullanıcı
+                    {% endif %}</td>
+            </tr>
+
+            <tr>
+                <td><a href="{{ path('user_edit', {'id': user.id}) }}">
+                        <button type="button" class="btn btn-info">Düzenle</button>
+                    </a>
+                    <a href="{{ path('user_index') }}">
+                        <button type="button" class="btn btn-warning">Geri Gel</button>
+                    </a>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

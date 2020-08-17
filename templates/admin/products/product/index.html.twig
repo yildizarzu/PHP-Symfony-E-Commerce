@@ -1,0 +1,85 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Ürünler{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+
+{% block content %}
+    {{ include('alerts.html.twig') }}
+    <br>
+    <div class="content-panel">
+        <h4><i class="fa fa-angle-right"></i> Ürün Listesi</h4>
+        <a style="float:right;margin-top:-40px;margin-right:20px;" class="btn btn-theme"
+           href="{{ path('product_new') }}">Yeni Ürün Ekle</a>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Ana Kategori</th>
+                <th>Alt Kategori</th>
+                <th>Ürün Adı</th>
+                <th>Marka</th>
+                <th>Fiyat</th>
+                <th>Stok</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+                <th>Resimler</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td></td>
+                    <td>
+                        {% for cat in categories %}
+                            {% if product.categoryid == cat.id %}
+                                {{ cat.title }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for cat in categories %}
+                            {% if product.subcategoryid == cat.id %}
+                                {{ cat.title }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ product.urunadi }}</td>
+                    <td>{{ product.marka }}</td>
+                    <td>{{ product.fiyat }} ₺</td>
+                    <td>{{ product.stok }} Adet</td>
+                    <td>
+                        {% if product.durum == 'true' %}
+                            Aktif
+                        {% else %}
+                            Devre Dışı
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('product_show',{'id': product.id}) }}">
+                            <button class="btn btn-info btn-xs"><i class="fa fa-file-text-o"></i></button>
+                        </a>
+                        <a href="{{ path('product_edit',{'id': product.id}) }}">
+                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                        </a>
+                    </td>
+                    <td><a href="{{ path('resimler_new', {'id': product.id}) }}">
+                            <button class="btn btn-outline-info btn-xs">Resim Ekle</button>
+                    <td><a style="color:darkmagenta;" class="btn btn-outline-primary" onclick="openWin('{{ path('product_gallery',{'id':product.id}) }}',680,500)">Galeri</a></td>
+
+                    </a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="13">Kayıt Bulunamadı</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

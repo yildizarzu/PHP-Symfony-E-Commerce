@@ -1,0 +1,33 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Resim Detayı{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+
+    <div class="tz-gallery">
+
+        <div style="margin-left:25%" class="row">
+                <div class="col-sm-5 col-md-8">
+                    <a class="lightbox" href="{{ asset('uploads')}}/images/{{ resimler.resim }}">
+                        <img src="{{ asset('uploads')}}/images/{{ resimler.resim }}">
+                    </a>
+                </div>
+        </div>
+
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('resimler_index') }}">Geri Dön</a>
+
+    <a class="btn btn-primary" href="{{ path('resimler_edit', {'id': resimler.id}) }}">Düzenle</a>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <script>
+        baguetteBox.run('.tz-gallery');
+    </script>
+{% endblock %}

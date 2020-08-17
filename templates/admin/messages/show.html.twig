@@ -1,0 +1,34 @@
+{% extends 'adminbase.html.twig' %}
+{% block title %} Mesaj Detayı {% endblock %}
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+{% block content %}
+<div class="content-panel">
+    <h4><i class="fa fa-angle-right"></i> Mesaj Listesi</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Mesaj Kodu</th>
+                <td>{{ message.id }}</td>
+            </tr>
+            <tr>
+                <th>İsim</th>
+                <td>{{ message.name }}</td>
+            </tr>
+            <tr>
+                <th>E-Mail Adresi</th>
+                <td>{{ message.email }}</td>
+            </tr>
+            <tr>
+                <th>Konu</th>
+                <td>{{ message.subject }}</td>
+            </tr>
+            <tr>
+                <th>Mesaj</th>
+                <td>{{ message.message }}</td>
+            </tr>
+        </tbody>
+    </table>
+   <a style="margin:20px;margin-top:10px" class="btn btn-primary" href="{{ path('messages_index') }}">Geri Dön</a>
+</div>
+{% endblock %}

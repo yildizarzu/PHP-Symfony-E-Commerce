@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Categoryid</th>
+                <td>{{ product.categoryid }}</td>
+            </tr>
+            <tr>
+                <th>Subcategoryid</th>
+                <td>{{ product.subcategoryid }}</td>
+            </tr>
+            <tr>
+                <th>Urunadi</th>
+                <td>{{ product.urunadi }}</td>
+            </tr>
+            <tr>
+                <th>Marka</th>
+                <td>{{ product.marka }}</td>
+            </tr>
+            <tr>
+                <th>Fiyat</th>
+                <td>{{ product.fiyat }}</td>
+            </tr>
+            <tr>
+                <th>Stok</th>
+                <td>{{ product.stok }}</td>
+            </tr>
+            <tr>
+                <th>Durum</th>
+                <td>{{ product.durum }}</td>
+            </tr>
+            <tr>
+                <th>Teknikozellikler</th>
+                <td>{{ product.teknikozellikler }}</td>
+            </tr>
+            <tr>
+                <th>Digerozellikler</th>
+                <td>{{ product.digerozellikler }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_index') }}">back to list</a>
+
+    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+
+    {{ include('product/_delete_form.html.twig') }}
+{% endblock %}

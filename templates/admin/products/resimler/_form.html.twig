@@ -1,0 +1,16 @@
+{{ form_start(form,{'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_widget(form)  }}
+
+
+        <div>
+
+                        <input class="btn btn-primary" type="file" name="resimyolu">
+
+        </div>
+
+
+{#<input type="file" name="resimyolu"><br><br>#}
+<button style="float:left;" class="btn btn-theme">{{ button_label|default('Kaydet') }}</button>
+<a style="margin-left:10px" class="btn btn-primary" href="{{ path('resimler_index') }}">Geri Dön</a>
+
+{{ form_end(form) }}

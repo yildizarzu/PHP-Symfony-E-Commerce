@@ -1,0 +1,35 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Kanaviçe & Etamin{% endblock %}
+
+{% block header %}
+    {{ include ('home/_header.html.twig') }}
+    {{ include ('alerts.html.twig') }}
+{% endblock %}
+
+{% block main %}
+<div style="padding-left:200px;padding-right:200px;" class="content">
+    <div style="background: white" class="contact-form">
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">E-Mail adresiniz ya da şifreniz yanlış</div>
+        {% endif %}
+        <div>
+            <span><label for="inputEmail" class="sr-only">E-Mail Adresiniz</label></span>
+            <span><input style="color:black" type="email" class="form-control" name="email" id="inputEmail"  placeholder="Email" required autofocus></span>
+        </div>
+        <div>
+            <span><label for="inputPassword" class="sr-only">Şifreniz</label></span>
+            <span><input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required></span>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <input value="Giriş Yap" style="margin-right:77%;" type="submit" class="myButton">
+    </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %} {{ include ('home/_footer.html.twig') }} {% endblock %}

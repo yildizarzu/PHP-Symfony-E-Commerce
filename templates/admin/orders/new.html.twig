@@ -1,0 +1,52 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}PHP Ödev{% endblock %}
+
+{% block navbar %} {{ include ('home/_header.html.twig') }} {% endblock %}
+
+{% block contenttop %}{{ include ('home/_contenttop.html.twig') }} {% endblock %}
+
+{% block main %}
+<div class="contact-form">
+    <form name="orders" method="post">
+        <div id="orders">
+            <div>
+                <label for="orders_amount">Tutar</label>
+                <input type="text" id="orders_amount" name="orders[amount]" value="{{ amount }}">
+            </div>
+            <div>
+                <label for="orders_name">İsim</label>
+                <input type="text" id="orders_name" name="orders[name]" maxlength="255" value="{{ user.name }}">
+            </div>
+            <div>
+                <label for="orders_address">Adres</label>
+                <input type="text" id="orders_address" name="orders[address]" maxlength="255" value="{{ user.address }}">
+            </div>
+            <div>
+                <label for="orders_city">Şehir</label>
+                <input type="text" id="orders_city" name="orders[city]" maxlength="255" value="{{ user.city }}">
+            </div>
+            <div>
+                <label for="orders_phone">Telefon</label>
+                <input type="text" id="orders_phone" name="orders[phone]" maxlength="255" value="{{ user.phone }}">
+            </div>
+            <div>
+                <label for="orders_shipinfo">Kargo Bilgileri</label>
+                <input type="text" id="orders_shipinfo" name="orders[shipinfo]" maxlength="255">
+            </div>
+            <div>
+                <label for="orders_note">Not</label>
+                <input type="text" id="orders_note" name="orders[note]" maxlength="255">
+            </div>
+            <input type="hidden" id="orders__token" name="orders[_token]"
+                   value="60IlC3JO_xv6Q62wjbsV9gNglzw9Fmt3xBaK6FKyNSI">
+            <input type="hidden" id="orders_userid" name="orders[userid]" value="{{ user.id }}">
+            <input type="hidden" id="orders_status" name="orders[status]" maxlength="255" value="true">
+            <span><input type="submit" value="Sepeti Onayla" class="myButton"></span>
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+{% block footer %} {{ include ('home/_footer.html.twig') }} {% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Kanaviçe & Etamin{% endblock %}
+
+{% block header %}
+    {{ include ('home/_header.html.twig') }}
+    {{ include ('alerts.html.twig') }}
+{% endblock %}
+
+{% block main %}
+<div style="padding:30px" class="content">
+    <table style="font-weight: bolder;font-size: 120%" class="table">
+        <tbody>
+        <tr>
+            <th>Kullanıcı Kodu</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>İsim</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <th>E-Mail Adresi</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Adres</th>
+            <td>{{ user.address }}</td>
+        </tr>
+        <tr>
+            <th>Telefon</th>
+            <td>{{ user.phone }}</td>
+        </tr>
+        <tr>
+            <th>Şehir</th>
+            <td>{{ user.city }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a style="border:0;background:#2fdab8;font-weight: bolder;font-size: 120%" class="btn btn-danger" href="{{ path('home') }}">Geri Dön</a>
+    <a style="border:0;background:#2fdab8;font-weight: bolder;font-size: 120%"  class="btn btn-danger" href="{{ path('account_edit', {'id': user.id}) }}">Düzenle</a>
+
+</div>
+
+{% endblock %}
+
+{% block footer %} {{ include ('home/_footer.html.twig') }} {% endblock %}

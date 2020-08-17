@@ -1,0 +1,217 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+    <style>
+        @media screen and (max-width: 580px) {
+            body {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            padding: 40px;
+            max-width: 800px;
+        }
+
+        .table {
+            margin: 0 0 40px 0;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            display: table;
+        }
+
+        @media screen and (max-width: 580px) {
+            .table {
+                display: block;
+            }
+        }
+
+        .row {
+            display: table-row;
+            background: #f6f6f6;
+        }
+
+        .row:nth-of-type(odd) {
+            background: #e9e9e9;
+        }
+
+        .row.header {
+            font-weight: 900;
+            color: #ffffff;
+            background: #E4292F;
+        }
+
+        .row.green {
+            background: #27ae60;
+        }
+
+        .row.blue {
+            background: #2980b9;
+        }
+
+        @media screen and (max-width: 580px) {
+            .row {
+                padding: 14px 0 7px;
+                display: block;
+            }
+
+            .row.header {
+                padding: 0;
+                height: 6px;
+            }
+
+            .row.header .cell {
+                display: none;
+            }
+
+            .row .cell {
+                margin-bottom: 10px;
+            }
+
+            .row .cell:before {
+                margin-bottom: 3px;
+                content: attr(data-title);
+                min-width: 98px;
+                font-size: 10px;
+                line-height: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #969696;
+                display: block;
+            }
+        }
+
+        .cell {
+            padding: 6px 12px;
+            display: table-cell;
+        }
+
+        @media screen and (max-width: 580px) {
+            .cell {
+                padding: 2px 16px;
+                display: block;
+            }
+        }
+    </style>
+    <div style="margin-top:-100px;padding-bottom:0;padding-top: 5px" class="content-panel">
+        {{ include('alerts.html.twig') }}
+        <h4><i class="fa fa-angle-right"></i> Sipariş Detayı</h4>
+        <form name="orders" method="post">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Sipariş No</th>
+                    <td>{{ order.id }}</td>
+                </tr>
+                <tr>
+                    <th>Kullanıcı Kodu</th>
+                    <td>{{ order.userid }}</td>
+                </tr>
+                <tr>
+                    <th>Müşteri Adı</th>
+                    <td>{{ order.name }}</td>
+                </tr>
+                <tr>
+                    <th>Tutar</th>
+                    <td>{{ order.amount }}</td>
+                </tr>
+                <tr>
+                    <th>Adres</th>
+                    <td>{{ order.address }}</td>
+                </tr>
+                <tr>
+                    <th>Şehir</th>
+                    <td>{{ order.city }}</td>
+                </tr>
+                <tr>
+                    <th>Telefon</th>
+                    <td>{{ order.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Teslimat Durumu</th>
+                    <td><input type="text" id="orders_shipinfo"
+                               name="orders[shipinfo]" maxlength="255"
+                               value="{{ order.shipinfo }}">
+                    </td>
+                </tr>
+                {#<tr>#}
+                {#<th>Update_at</th>#}
+                {#<td>{{ order.updateAt ? order.updateAt|date('Y-m-d H:i:s') : '' }}</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                {#<th>Created_at</th>#}
+                {#<td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
+                {#</tr>#}
+                <tr>
+                    <th>Notu</th>
+                    <td>
+                        <input type="text" id="orders_note" name="orders[note]"
+                               maxlength="255" value="{{ order.note }}">
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sipariş Durumu</th>
+                    <td><select name="orders[status]" class="form-control">
+                            <option value="{{ order.status }}">
+                                {% if order.status == "new" %} Yeni
+                                {% elseif order.status == "accepted" %} Onaylandı
+                                {% elseif order.status == "inshipping" %} Kargoda
+                                {% elseif order.status == "canceled" %} İptal Edildi
+                                {% elseif order.status == "completed" %} Tamamlandı
+                                {% endif %}
+                                </option>
+                            <option value="new">Yeni</option>
+                            <option value="accepted">Onaylandı</option>
+                            <option value="inshipping">Kargoda</option>
+                            <option value="canceled">İptal Edildi</option>
+                            <option value="completed">Tamamlandı</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <th><button class="btn btn-primary">Güncelle</button></th>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <h4 style="margin-top:-25px"><i class="fa fa-angle-right"></i> Ürünler</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Kodu</th>
+                    <th>Fiyat</th>
+                    <th>Adet</th>
+                    <th>Toplam Fiyat</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for detail in details %}
+                    <tr>
+                        <td>{{ detail.name }}</td>
+                        <td>{{ detail.productid }}</td>
+                        <td>{{ detail.price }}</td>
+                        <td>{{ detail.quantity }}</td>
+                        <td>{{ detail.amount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <input type="hidden"  name="orders[userid]" value="{{ order.userid }}">
+            <input type="hidden"  name="orders[amount]" value="{{ order.amount }}">
+            <input type="hidden"  name="orders[name]" value="{{ order.name }}">
+            <input type="hidden"  name="orders[address]" value="{{ order.address }}">
+            <input type="hidden"  name="orders[city]" value="{{ order.city }}">
+            <input type="hidden"  name="orders[phone]" value="{{ order.phone }}">
+
+            <input type="hidden" id="orders__token" name="orders[_token]"
+                   value="Lw_m6u8HKyC-ac10tJFQqRP2W5GAq2wu9RFGapQpwV0">
+        </form>
+    </div>
+{% endblock %}

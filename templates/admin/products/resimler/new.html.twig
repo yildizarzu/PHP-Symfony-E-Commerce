@@ -1,0 +1,15 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Resim Ekleme{% endblock %}
+
+{% block pagetitle %} {{ pagetitle }} {% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+
+    {{ include('admin/products/resimler/_form.html.twig') }}
+
+{% endblock %}

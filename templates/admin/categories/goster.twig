@@ -1,0 +1,62 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+
+    <div class="form-panel">
+        <h4><i class="fa fa-angle-right"></i> Kategori - {{ category.id }}</h4>
+        <hr>
+        <table class="table">
+            <tbody>
+            {% for cat in categories %}
+                {% if category.parentid == cat.id %}
+                    <tr>
+                        <th>Üst Kategori Numarası</th>
+                        <td>
+                            {{ cat.title }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+            <tr>
+                <th>Başlık</th>
+                <td>{{ category.title }}</td>
+            </tr>
+            <tr>
+                <th>Anahtar Kelimeler</th>
+                <td>{{ category.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Açıklama</th>
+                <td>{{ category.description }}</td>
+            </tr>
+            <tr>
+                <th>Durum</th>
+                <td>{% if category.status == 'true' %}
+                        Aktif
+                    {% else %}
+                        Devre Dışı
+                    {% endif %}</td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('kategori_guncelle', {'id': category.id}) }}">
+                        <button type="button" class="btn btn-info">Düzenle</button>
+                    </a>
+                    <a href="{{ path('kategoriler_index') }}">
+                        <button type="button" class="btn btn-warning">Geri Gel</button>
+                    </a>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

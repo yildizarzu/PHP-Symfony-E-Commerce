@@ -1,0 +1,67 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+    <div class="content-panel">
+        <h4><i class="fa fa-angle-right"></i> {{ title }}</h4>  <a
+                style="float:right;margin-top:-40px;margin-right:20px;" href="{{ path('kategori_ekle') }}">
+        </a>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Sipariş Kodu</th>
+                <th>Kullanıcı Kodu</th>
+                <th>İsim</th>
+                <th>Adress</th>
+                <th>Şehir</th>
+                <th>Telefon</th>
+                <th>Sipariş Durumu</th>
+                <th>İşlemler</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.userid }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.city }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>
+                        {% if order.status == "new" %}
+                            Yeni
+                        {% elseif order.status == "accepted" %}
+                            Onaylandı
+                        {% elseif order.status == "onshipping" %}
+                            Kargoda
+                        {% elseif order.status == "canceled" %}
+                            İptal Edildi
+                        {% elseif order.status == "completed" %}
+                            Tamamlandı
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        <form>
+                            <button class="btn btn-primary"
+                                    onclick="openWin('{{ path('admin_order_show',{'id':order.id}) }}',500,700)">Göster
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Şuanda Hiç Sipariş Yok</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Kanaviçe & Etamin{% endblock %}
+
+{% block header %}
+    {{ include ('home/_header.html.twig') }}
+    {{ include ('alerts.html.twig') }}
+{% endblock %}
+
+{% block main %}
+
+    <div style="padding:150px;padding-top:50px;">
+        <h2>Hakkımızda</h2>
+        {{ setting.aboutus|raw }}
+
+    </div>
+{% endblock %}
+
+{% block footer %} {{ include ('home/_footer.html.twig') }} {% endblock %}

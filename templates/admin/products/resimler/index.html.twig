@@ -1,0 +1,54 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Resim Listesi{% endblock %}
+
+{% block navbar %} {% include 'admin/navbar.twig' %}{% endblock %}
+
+{% block sidebar %} {% include 'admin/sidebar.twig' %} {% endblock %}
+
+{% block content %}
+    {{ include('alerts.html.twig') }}
+    <div class="content-panel">
+        <h4><i class="fa fa-angle-right"></i> Resim Listesi</h4>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Ürün Adı</th>
+                <th>Resim</th>
+                <th>İşlemler</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for resimler in resimlers %}
+                <tr >
+                    <td></td>
+                    <td style="padding:20px;padding-left: 10px">
+                        {% for product in products %}
+                            {% if product.id == resimler.urunid %}
+                                {{ product.urunadi }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td style="padding:10px"><img width="50" height="40" src="{{ asset('uploads') }}/images/{{ resimler.resim }}"></td>
+                    <td style="padding:20px;padding-left:0;">
+                        <a style="float:left;" href="{{ path('resimler_show',{'id':resimler.id}) }}">
+                            <button class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>
+                        </a>
+                        <a style="float:left;margin-left:5px;" href="{{ path('resimler_edit',{'id': resimler.id}) }}">
+                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                        </a>
+                        {{ include('admin/products/resimler/_delete_form.html.twig') }}
+                    </td>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

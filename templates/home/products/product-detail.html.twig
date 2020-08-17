@@ -1,0 +1,135 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Mert Bilgisayar Anasayfa{% endblock %}
+
+{% block header %}
+
+    <link rel="stylesheet" href="{{ asset('home') }}/css/flexslider.css" type="text/css" media="screen">
+    {{ include ('alerts.html.twig') }}
+{% endblock %}
+
+{% block main %}
+    <div style="padding: 40px" class="container">
+        <div class="col-sm-4 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+
+
+                    <div class="clearfix"></div>
+                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                        <ul class="slides" style="width: 1000%; transition-duration: 0s;">
+                            {% set sayac = 1 %}
+                            {% for resim in resimler %}
+                                <li data-thumb="{{ asset('uploads') }}/images/{{ resim.resim }}" class="clone" aria-hidden="true" style="width: 273px; float: left; display: block;">
+                                    <div style="height: 100%;" class="thumb-image" style="margin-left: 300px"> <img src="{{ asset('uploads') }}/images/{{ resim.resim }}" data-imagezoom="true" class="img-responsive" draggable="false"> </div>
+                                </li>
+                                {% set sayac = sayac + 1 %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <ul class="flex-direction-nav">
+                        <li class="flex-nav-prev">
+                            <a class="flex-prev" href="#">Önceki</a>
+                        </li>
+                        <li class="flex-nav-next"><a class="flex-next" href="#">Sonraki</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 single-right-left simpleCart_shelfItem">
+            <h3>{{ product.urunadi }}</h3>
+            <p><span class="item_price">{{ product.fiyat }}</span> ₺</p>
+            <div class="rating1">
+						<span class="starRating">
+							<input id="rating5" type="radio" name="rating" value="5">
+							<label for="rating5">5</label>
+							<input id="rating4" type="radio" name="rating" value="4">
+							<label for="rating4">4</label>
+							<input id="rating3" type="radio" name="rating" value="3" checked="">
+							<label for="rating3">3</label>
+							<input id="rating2" type="radio" name="rating" value="2">
+							<label for="rating2">2</label>
+							<input id="rating1" type="radio" name="rating" value="1">
+							<label for="rating1">1</label>
+						</span>
+            </div>
+
+
+            <form action="#" method="post">
+            <div class="color-quality">
+                <div class="color-quality-right">
+                    <h5>Quantity :</h5>
+                    <input type="number" value="1" max="{{ product.stok }}" id="shopcart_quantity" style="width:40px;" name="shopcart[quantity]" required="required">
+
+                </div>
+            </div>
+
+
+                <div class="occasion-cart">
+                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+
+
+                            <input type="submit" name="submit" value="Add to Cart" class="button">
+
+
+                </div>
+
+            </div>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <input type="hidden" id="shopcart_userid" name="shopcart[userid]" required="required" value="{{ app.user.id }}">
+                {% endif %}
+                <input type="hidden" id="shopcart_productid" name="shopcart[productid]" required="required" value="{{ product.id }}">
+                <input type="hidden" id="shopcart__token" name="token" value="{{ csrf_token('shopcart-token') }}">
+            </form>
+
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls" style="padding: 0">
+                <li class="share">Ürünü Paylaşın : </li>
+                <li style="display: inline-table;"><a href="#" class="facebook">
+                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                <li style="display: inline-table;"><a href="#" class="twitter">
+                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                <li style="display: inline-table;"><a href="#" class="instagram">
+                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                <li style="display: inline-table;"><a href="#" class="pinterest">
+                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+            </ul>
+
+        </div>
+        <div class="clearfix"> </div>
+        <!-- /new_arrivals -->
+        <div class="responsive_tabs_agileits">
+            <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                <ul class="resp-tabs-list">
+                    <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab">Teknik Özellikler</li>
+                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab">Diğer Özellikler</li>
+                </ul>
+                <div class="resp-tabs-container">
+                    <!--/tab_one-->
+                    <h2 class="resp-accordion resp-tab-active" role="tab" aria-controls="tab_item-0"><span class="resp-arrow"></span>Description</h2><div class="tab1 resp-tab-content resp-tab-content-active" aria-labelledby="tab_item-0" style="display:block">
+
+                        <div class="single_page_agile_its_w3ls">
+                        <p>{{ product.teknikozellikler|raw }}</p>
+                        </div>
+                    </div>
+                    <!--//tab_one-->
+                    <h2 class="resp-accordion" role="tab" aria-controls="tab_item-1"><span class="resp-arrow"></span>Reviews</h2><div class="tab2 resp-tab-content" aria-labelledby="tab_item-1">
+
+                        <div class="single_page_agile_its_w3ls">
+                            <p>{{ product.digerozellikler|raw }}</p>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //new_arrivals -->
+        <!--/slider_owl-->
+
+
+    </div>
+
+{% endblock %}
+
+{% block footer %} {{ include ('home/_footer.html.twig') }}{% endblock %}
